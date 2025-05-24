@@ -16,6 +16,7 @@ message Request {
         RemoveLayerRequest remove_layer = 10;
         RestoreLayerRequest restore_layer = 11;
         SetLayerPropsRequest set_layer_props = 12;
+        SetActiveLayerRequest set_active_layer = 13;
     }
 }
 
@@ -33,6 +34,7 @@ message Response {
         RemoveLayerResponse remove_layer = 10;
         RestoreLayerResponse restore_layer = 11;
         SetLayerPropsResponse set_layer_props = 12;
+        SetActiveLayerResponse set_active_layer = 13;
     }
 }
 
@@ -138,6 +140,10 @@ enum SetLayerPropsResponse {
     SET_LAYER_PROPS_RESP_ERR_INVALID_ID = 2;
 }
 
+message SetActiveLayerResponse {
+    bool ok = 1;
+}
+
 enum SetActivePhysicalLayoutErrorCode {
     SET_ACTIVE_PHYSICAL_LAYOUT_ERR_OK = 0;
     SET_ACTIVE_PHYSICAL_LAYOUT_ERR_GENERIC = 1;
@@ -171,6 +177,10 @@ message RestoreLayerRequest {
 message SetLayerPropsRequest {
     uint32 layer_id = 1;
     string name = 2;
+}
+
+message SetActiveLayerRequest {
+    uint32 layer = 1;
 }
 
 message Keymap {
