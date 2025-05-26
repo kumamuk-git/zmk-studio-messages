@@ -41,7 +41,12 @@ message Response {
 message Notification {
     oneof notification_type {
         bool unsaved_changes_status_changed = 1;
+        ActiveLayerChangedNotification active_layer_changed = 2;
     }
+}
+
+message ActiveLayerChangedNotification {
+    uint32 layer = 1;
 }
 
 message SaveChangesResponse {
@@ -141,7 +146,17 @@ enum SetLayerPropsResponse {
 }
 
 message SetActiveLayerResponse {
-    bool ok = 1;
+    oneof result {
+        bool ok = 1;
+        SetActiveLayerErrorCode err = 2;
+    }
+}
+
+enum SetActiveLayerErrorCode {
+    SET_ACTIVE_LAYER_ERR_OK = 0;
+    SET_ACTIVE_LAYER_ERR_GENERIC = 1;
+    SET_ACTIVE_LAYER_ERR_INVALID_LAYER = 2;
+    SET_ACTIVE_LAYER_ERR_LAYER_NOT_AVAILABLE = 3;
 }
 
 enum SetActivePhysicalLayoutErrorCode {
